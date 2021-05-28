@@ -7,7 +7,7 @@ namespace PokerMoqWorkshop.Entities
         /// <summary>
         /// Gets or sets the highest card for the hand.
         /// </summary>
-        public Card HighestCard { get; set; }
+        public int HighestCardRank { get; set; }
 
         /// <summary>
         /// Gets or sets the hand type.
@@ -17,7 +17,7 @@ namespace PokerMoqWorkshop.Entities
         // <inheritdoc>
         public override int GetHashCode()
         {
-            return this.HighestCard.GetHashCode() + this.HandType.GetHashCode();
+            return this.HighestCardRank.GetHashCode() + this.HandType.GetHashCode();
         }
 
         // <inheritdoc>
@@ -25,6 +25,12 @@ namespace PokerMoqWorkshop.Entities
         {
             var pokerHandResult = (PokerHandResult)obj;
             return this.HandType == pokerHandResult.HandType && this.HandType == pokerHandResult.HandType;
+        }
+
+        // <inheritdoc>
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", this.HandType, this.HighestCardRank);
         }
     }
 }

@@ -16,7 +16,7 @@
             return new PokerHandResult()
             {
                 HandType = handType,
-                HighestCard = highestCard
+                HighestCardRank = highestCard.Rank
             };
         }
 
@@ -43,52 +43,71 @@
         {
             var royalFlush = new List<int>() { 14, 13, 12, 11, 10 };
             var containsRoyalFlushNumbers = hand.Select(x => x.Rank).All(royalFlush.Contains);
-            return containsRoyalFlushNumbers && this.isSuitAllTheSame(hand);
+            return containsRoyalFlushNumbers && this.areSuitsAllSame(hand);
         }
 
         private bool isStraightFlush(IEnumerable<Card> hand)
         {
-            var cardRanks = hand.Select(x => x.Rank).OrderBy(x => x).ToArray();
-            var isSequential = Enumerable.Range(0, cardRanks.Count()).All(x => cardRanks[x] == cardRanks[0] + x);
-            return isSequential && this.isSuitAllTheSame(hand);
+            return this.areCardsSequential(hand) && this.areSuitsAllSame(hand);
         }
 
         private bool isFourOfAKind(IEnumerable<Card> hand)
         {
-            return false;
+             return hand.GroupBy(x => x.Rank).Any(x => x.Count() >= 4);
         }
 
         private bool isFullHouse(IEnumerable<Card> hand)
         {
-            return false;
+            var cardGroups = hand.GroupBy(x => x.Rank);
+            return cardGroups.Where(x => x.Count() >= 2).Count() >= 2 && cardGroups.Where(x => x.Count() >= 3).Count() >= 1;
         }
 
         private bool isFlush(IEnumerable<Card> hand)
         {
-            return false;
+            return this.areSuitsAllSame(hand);
         }
 
         private bool isStraight(IEnumerable<Card> hand)
         {
-            return false;
+            return this.areCardsSequential(hand);
         }
 
         private bool isThreeOfAKind(IEnumerable<Card> hand)
         {
-            return false;
+            return hand.GroupBy(x => x.Rank).Any(x => x.Count() >= 3);
         }
         private bool isTwoPair(IEnumerable<Card> hand)
         {
-            return false;
+            return hand.GroupBy(x => x.Rank).Where(x => x.Count() >= 2).Count() >= 2;
         }
-        private bool  isPair(IEnumerable<Card> hand)
+        private bool isPair(IEnumerable<Card> hand)
         {
-            return false;
+            return hand.GroupBy(x => x.Rank).Any(x => x.Count() == 2);
         }
 
-        private bool isSuitAllTheSame(IEnumerable<Card> hand)
+        private bool areSuitsAllSame(IEnumerable<Card> hand)
         {
             return hand.Select(x => x.Suit).Distinct().Count() == 1; 
+        }
+
+        private bool areCardsSequential(IEnumerable<Card> hand)
+        {
+            var cardRanks = hand.Select(x => x.Rank).Distinct().OrderBy(x => x).ToArray();
+            var sequentialCount = 0;
+            for(var i = 1; i < cardRanks.Length; i++) 
+            {
+                var previousCardRank = cardRanks[i - 1];
+                var currentCardRank = cardRanks[i];
+                if(currentCardRank - previousCardRank == 1)
+                {
+                    sequentialCount++;
+                } else
+                {
+                    sequentialCount = 0;
+                }
+            }
+            return sequentialCount >= 4;
+            //return Enumerable.Range(0, cardRanks.Count()).All(x => cardRanks[x] == cardRanks[0] + x);
         }
     }
 }

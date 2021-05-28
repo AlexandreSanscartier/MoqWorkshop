@@ -12,7 +12,7 @@ namespace PokerMoqWorkshop.tests
 
         public DeckGeneratorTests()
         {
-            this.deckGenerator = new DeckGenerator();
+            this.deckGenerator = new StandardDeckGenerator();
         }
 
         [Fact]

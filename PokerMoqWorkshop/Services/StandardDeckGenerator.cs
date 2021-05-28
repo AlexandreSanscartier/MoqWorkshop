@@ -4,8 +4,11 @@
     using PokerMoqWorkshop.Entities.Enum;
     using System;
     using System.Collections.Generic;
-    public class DeckGenerator : IDeckGenerator
+
+    // <inheritdoc>
+    public class StandardDeckGenerator : IDeckGenerator
     {
+        // <inheritdoc>
         public IEnumerable<Card> GenerateDeck()
         {
             var deck = new List<Card>();
