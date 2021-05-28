@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerMoqWorkshop", "PokerMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerMoqWorkshop.tests", "PokerMoqWorkshop.tests\PokerMoqWorkshop.tests.csproj", "{59463EDD-E4D2-4286-A890-8004850C2EF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerConsole", "ConsoleApp1\PokerConsole.csproj", "{39FE5A01-A821-4B3B-A45D-4084429E4B6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerConsole", "PokerConsole\PokerConsole.csproj", "{39FE5A01-A821-4B3B-A45D-4084429E4B6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
