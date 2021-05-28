@@ -14,6 +14,11 @@ namespace PokerMoqWorkshop.Entities
         /// </summary>
         public HandType HandType { get; set; }
 
+        /// <summary>
+        /// Get or sets the hand's score.
+        /// </summary>
+        public int Score { get; set; }
+
         // <inheritdoc>
         public override int GetHashCode()
         {
@@ -30,7 +35,7 @@ namespace PokerMoqWorkshop.Entities
         // <inheritdoc>
         public override string ToString()
         {
-            return string.Format("{0} {1}", this.HandType, this.HighestCardRank);
+            return string.Format("{0} {1} {2}", this.HandType, this.HighestCardRank, this.Score);
         }
     }
 }

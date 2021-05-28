@@ -5,6 +5,7 @@
     using PokerMoqWorkshop.Entities;
     using PokerMoqWorkshop.Services;
     using PokerMoqWorkshop;
+    using PokerMoqWorkshop.Entities.Enum;
 
     class Program
     {
@@ -31,9 +32,9 @@
             pokerGame.River();
 
             var pokerHandAnalyzer = new PokerHandAnalyzer();
-
             var playersCards = new List<IEnumerable<Card>>();
             var playerHandResult = new List<PokerHandResult>();
+
             for (var i = 0; i < pokerGame.Players.Count; i++)
             {
                 playersCards.Add(pokerGame.GetAvailableCardsForPlayerAtIndex(i));
